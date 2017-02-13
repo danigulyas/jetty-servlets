@@ -10,7 +10,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = "JettyMain"
+mainClassName = "blog.JettyMain"
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -22,8 +22,13 @@ repositories {
 dependencies {
     compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.0.v20161208'
     compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.0.v20161208'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.6.Final'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
-    compile 'com.google.guava:guava:20.0'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.12'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.22'
+    compile group: 'com.google.guava', name: 'guava', version: '21.0'
+
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
