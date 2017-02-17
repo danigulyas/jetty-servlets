@@ -5,7 +5,6 @@ import com.danigu.blog.post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.jetty.http.HttpStatus;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +18,8 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 public class PostServlet extends HttpServlet {
-    private final String GET_ALL_URI = "/all";
-    private final PostService postService;
+    public final String GET_ALL_URI = "/all";
+    public final PostService postService;
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,40 +39,23 @@ public class PostServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getPathInfo() != null) {
             handleMethodNotFound(req, resp);
             return;
         }
 
-        /**
-         * TODO(dani): Itt csak a get paramokat huzza, vagy postot is?
-         */
-        String name = req.getParameter("name");
-        String content = req.getParameter("content");
-
-        if(name == null || content == null || name.length() == 0 || content.length() == 0)
-        {
-            resp.setStatus(HttpStatus.BAD_REQUEST_400);
-            resp.getWriter().println("Post parameter name and content is required, please set them to a string with at " +
-                    "least one character.");
-            return;
-        }
-
         resp.getWriter().println("<html><body>");
-
-        Post newPost = postService.create(name, content);
-        resp.setStatus(HttpStatus.CREATED_201);
-        resp.getWriter().println(formatPost(newPost));
-
+        handleNewPostRequest(req, resp);
         resp.getWriter().println("</body></html>");
     }
 
-    public void handleMethodNotFound(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.getWriter().println("No handler found.");
-        resp.setStatus(HttpStatus.NOT_FOUND_404);
-    }
-
+    /**
+     * Handler for getting all the posts.
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     public void handleGetAll(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Post> posts = postService.getAll();
         PrintWriter pw = resp.getWriter();
@@ -88,7 +70,59 @@ public class PostServlet extends HttpServlet {
         }
     }
 
-    private String formatPost(Post post) {
+    /**
+     * Handling new post requests.
+     * TODO(dani): Handle validation with AOP!
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
+    public void handleNewPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        if(!validNewPostRequest(req, resp)) {
+            resp.setStatus(HttpStatus.BAD_REQUEST_400);
+            resp.getWriter().println("Post parameter name and content is required, please set them to a string with at " +
+                    "least one character.");
+            return;
+        }
+
+        String name = req.getParameter("name");
+        String content = req.getParameter("content");
+
+        Post newPost = postService.create(name, content);
+        resp.setStatus(HttpStatus.CREATED_201);
+
+        resp.getWriter().println(formatPost(newPost));
+    }
+
+    /**
+     * @param req
+     * @param resp
+     * @return boolean indicating the validity of the new post request.
+     * @throws IOException
+     */
+    public boolean validNewPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String name = req.getParameter("name");
+        String content = req.getParameter("content");
+
+        return name != null && content != null && name.length() > 0 && content.length() > 0;
+    }
+
+    /**
+     * Method for handling 404's.
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
+    public void handleMethodNotFound(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.getWriter().println("No handler found.");
+        resp.setStatus(HttpStatus.NOT_FOUND_404);
+    }
+
+    /**
+     * @param post
+     * @return HTML formatted output of the post.
+     */
+    public String formatPost(Post post) {
         return String.format("<p><code>#%d</code> - <b>%s</b>: %s...</p>", post.getId(), post.getName(), post.getContent());
     }
 

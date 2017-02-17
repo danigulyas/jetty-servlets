@@ -27,7 +27,7 @@ public class StationLocator {
 
     public PostRepository getPostRepository() {
         if(postRepository == null) {
-            postRepository = new PostRepository(getEntityManagerFactory().createEntityManager());
+            postRepository = new PostRepository(getEntityManagerFactory());
         }
 
         return postRepository;

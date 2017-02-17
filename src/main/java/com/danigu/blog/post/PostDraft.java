@@ -1,5 +1,7 @@
 package com.danigu.blog.post;
 
+import com.danigu.blog.comment.Comment;
+import com.google.common.collect.ImmutableList;
 import lombok.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -12,24 +14,29 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class PostDraft {
     protected final String name;
     protected final String content;
+    protected final ImmutableList<Comment> comments;
 
-    protected PostDraft(String name, String content) {
+    protected PostDraft(String name, String content, ImmutableList<Comment> comments) {
         checkNotNull(name);
         checkNotNull(content);
+        checkNotNull(comments);
 
         this.name = name;
         this.content = content;
+        this.comments = comments;
     }
 
     public static class Builder {
         protected String name;
         protected String content;
+        protected ImmutableList<Comment> comments;
 
         Builder() {}
 
         public Builder(PostDraft draft) {
             this.name = draft.getName();
             this.content = draft.getContent();
+            this.comments = draft.getComments();
         }
 
         public Builder name(String name) {
@@ -42,8 +49,13 @@ public class PostDraft {
             return this;
         }
 
+        public Builder comments(ImmutableList<Comment> comments) {
+            this.comments = comments;
+            return this;
+        }
+
         public PostDraft build() {
-            return new PostDraft(name, content);
+            return new PostDraft(name, content, comments);
         }
     }
 }

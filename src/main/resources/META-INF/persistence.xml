@@ -8,6 +8,7 @@
     <persistence-unit name="blog" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.danigu.blog.post.PostEntity</class>
+        <class>com.danigu.blog.comment.CommentEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/blog"/>
             <property name="hibernate.connection.username" value="root"/>
@@ -20,7 +21,6 @@
             <property name="hibernate.connection.characterEncoding" value="utf-8"/>
             <property name="hibernate.current_session_context_class" value="thread"/>
 
-            <property name="hibernate.archive.autodetection" value="class"></property>
             <property name="hibernate.hbm2ddl.auto" value="update"></property>
 
             <property name="hibernate.show_sql" value="true"/>
