@@ -1,6 +1,6 @@
 package com.danigu.blog.servlet;
 
-import com.danigu.blog.post.service.Post;
+import com.danigu.blog.post.Post;
 import com.danigu.blog.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.jetty.http.HttpStatus;
