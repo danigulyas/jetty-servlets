@@ -4,6 +4,7 @@ package com.danigu.blog.post.persistence;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @Entity(name = "post")
 @Table(name = "post")
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 class PostEntity {
     @Id
     @GeneratedValue

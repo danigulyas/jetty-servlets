@@ -4,6 +4,10 @@ import com.danigu.blog.common.TwoWayAdaptor;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +34,11 @@ public abstract class CommonRepository<Entity, DTO> {
 
     public List<DTO> getAll() {
         EntityManager em = getEntityManager();
-        List<Entity> result = em.createQuery(em.getCriteriaBuilder().createQuery(getClazz())).getResultList();
+
+        //TODO(dani): this is ugly, clean this up.
+        CriteriaQuery<Entity> cq = em.getCriteriaBuilder().createQuery(getClazz());
+        cq.select(cq.from(getClazz()));
+        List<Entity> result = em.createQuery(cq).getResultList();
 
         return result.stream().map(adaptor::convert).collect(Collectors.toList());
     }

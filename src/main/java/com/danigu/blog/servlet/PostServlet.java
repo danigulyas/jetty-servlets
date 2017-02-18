@@ -1,5 +1,6 @@
 package com.danigu.blog.servlet;
 
+import com.danigu.blog.post.service.Post;
 import com.danigu.blog.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.jetty.http.HttpStatus;
@@ -77,33 +78,18 @@ public class PostServlet extends HttpServlet {
      * @throws IOException
      */
     public void handleNewPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if(!validNewPostRequest(req, resp)) {
+        String name = req.getParameter("name");
+        String content = req.getParameter("content");
+
+        try {
+            Post newPost = postService.newPost(name, content);
+            resp.setStatus(HttpStatus.CREATED_201);
+            resp.getWriter().println(formatPost(newPost));
+        } catch (IllegalArgumentException iae) {
             resp.setStatus(HttpStatus.BAD_REQUEST_400);
-            resp.getWriter().println("PostDTO parameter name and content is required, please set them to a string with at " +
-                    "least one character.");
-            return;
+            resp.getWriter().println("Invalid request, please put name and content into the post parameters" +
+                    "with a minimum length of 1 characters both.");
         }
-
-        String name = req.getParameter("name");
-        String content = req.getParameter("content");
-
-        Post newPost = postService.create(name, content);
-        resp.setStatus(HttpStatus.CREATED_201);
-
-        resp.getWriter().println(formatPost(newPost));
-    }
-
-    /**
-     * @param req
-     * @param resp
-     * @return boolean indicating the validity of the new post request.
-     * @throws IOException
-     */
-    public boolean validNewPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String name = req.getParameter("name");
-        String content = req.getParameter("content");
-
-        return name != null && content != null && name.length() > 0 && content.length() > 0;
     }
 
     /**
