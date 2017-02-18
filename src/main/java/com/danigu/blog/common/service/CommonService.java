@@ -35,13 +35,12 @@ public abstract class CommonService<E, D> {
         return repository.getAll().stream().map(transformer::convert).collect(Collectors.toList());
     }
 
-    public D getById(long id) throws IllegalArgumentException {
-        if(isNull(id)) throw new IllegalArgumentException("Id can't be null.");
-
+    public D getById(Long id) {
+        checkNotNull(id);
         return transformer.convert(repository.getById(id));
     }
 
-    public void deleteById(long id) throws NotFoundException {
+    public void deleteById(Long id) throws NotFoundException {
         if(isNull(id)) throw new NotFoundException("No " + getClazz().getName() + " with id 'null'.");
 
         E entity = repository.getById(id);

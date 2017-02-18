@@ -15,7 +15,8 @@ import static org.mockito.Mockito.*;
 
 /**
  * Tests for generic repository.
- * TODO(dani): add tests for getAll();
+ * TODO(dani): Add tests for {@link CommonRepository::getAll()}.
+ * TODO(dani): Depends on {@link PostRepository}, decoupling with a fixture would be better.
  * @author dani
  */
 public class CommonRepositoryTest {
