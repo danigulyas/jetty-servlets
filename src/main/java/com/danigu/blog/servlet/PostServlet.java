@@ -1,7 +1,6 @@
 package com.danigu.blog.servlet;
 
-import com.danigu.blog.post.Post;
-import com.danigu.blog.post.PostService;
+import com.danigu.blog.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -80,7 +79,7 @@ public class PostServlet extends HttpServlet {
     public void handleNewPostRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if(!validNewPostRequest(req, resp)) {
             resp.setStatus(HttpStatus.BAD_REQUEST_400);
-            resp.getWriter().println("Post parameter name and content is required, please set them to a string with at " +
+            resp.getWriter().println("PostDTO parameter name and content is required, please set them to a string with at " +
                     "least one character.");
             return;
         }

@@ -1,9 +1,8 @@
 package com.danigu.blog.dic;
 
-import com.danigu.blog.post.PostRepository;
-import com.danigu.blog.post.PostService;
+import com.danigu.blog.post.persistence.PostRepository;
+import com.danigu.blog.post.service.PostService;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 

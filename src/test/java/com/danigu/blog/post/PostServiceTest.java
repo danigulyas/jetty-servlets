@@ -1,12 +1,14 @@
 package com.danigu.blog.post;
 
+import com.danigu.blog.post.persistence.PostEntity;
+import com.danigu.blog.post.persistence.PostRepository;
+import com.danigu.blog.post.service.PostService;
 import javassist.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -73,7 +75,7 @@ public class PostServiceTest {
 
         postService.create(NAME, CONTENT);
 
-        verify(repository).persist(captor.capture());
+        verify(repository).save(captor.capture());
         PostEntity entity = captor.getValue();
 
         assertEquals("Entity and name argument is the same.", entity.getName(), NAME);
