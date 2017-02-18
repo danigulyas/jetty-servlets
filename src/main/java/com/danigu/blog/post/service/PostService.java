@@ -16,7 +16,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @AllArgsConstructor
 public class PostService {
     final PostRepository repository;
-    final ServiceDTOAdaptor adaptor;
+    final ServiceDTOTransformer adaptor;
 
     /**
      * Returns a list of posts.

@@ -14,7 +14,7 @@ import javax.persistence.EntityManagerFactory;
 public class PostRepository extends CommonRepository<PostEntity, PostDTO> {
 
     public PostRepository(EntityManagerFactory emf) {
-        super(emf, new PersistenceDTOAdaptor());
+        super(emf, new PersistenceDTOTransformer());
     }
 
     @Override
