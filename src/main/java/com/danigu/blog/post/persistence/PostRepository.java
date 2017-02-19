@@ -13,11 +13,6 @@ import javax.persistence.EntityManagerFactory;
 public class PostRepository extends CommonRepository<PostEntity> {
 
     public PostRepository(EntityManagerFactory emf) {
-        super(emf);
-    }
-
-    @Override
-    protected Class<PostEntity> getClazz() {
-        return PostEntity.class;
+        super(emf, PostEntity.class);
     }
 }

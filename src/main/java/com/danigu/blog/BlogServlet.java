@@ -1,4 +1,4 @@
-package com.danigu.blog.servlet;
+package com.danigu.blog;
 
 import com.danigu.blog.comment.Comment;
 import com.danigu.blog.comment.service.CommentService;

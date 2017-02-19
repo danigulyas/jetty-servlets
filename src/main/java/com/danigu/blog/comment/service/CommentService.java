@@ -16,7 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author dani
  */
 public class CommentService extends CommonService<CommentEntity, Comment> {
-    public CommentService(CommentRepository repository, CommentEntityDTOTransformer transformer) {
+    public CommentService(CommentRepository repository, CommentTransformer transformer) {
         super(repository, transformer);
     }
 

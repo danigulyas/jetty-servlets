@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Could've been nicer if only {@link com.danigu.blog.post.service.PostEntityDTOTransformer}
+ * Could've been nicer if only {@link PostTransformer}
  * could access the constructor.
  * @see PostDTO
  * @author dani

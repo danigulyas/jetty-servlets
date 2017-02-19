@@ -3,7 +3,7 @@ package com.danigu.blog.common.service;
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.PostEntity;
 import com.danigu.blog.post.persistence.PostRepository;
-import com.danigu.blog.post.service.PostEntityDTOTransformer;
+import com.danigu.blog.post.service.PostTransformer;
 import com.danigu.blog.post.service.PostService;
 import javassist.NotFoundException;
 import org.junit.Before;
@@ -22,13 +22,13 @@ import static org.mockito.Mockito.when;
  */
 public class CommonServiceTest {
     private PostRepository repository;
-    private PostEntityDTOTransformer transformer;
+    private PostTransformer transformer;
     private PostService service;
 
     @Before
     public void instantiate() {
         repository = mock(PostRepository.class);
-        transformer = new PostEntityDTOTransformer(); //TODO(dani): fixture needed here as well.
+        transformer = new PostTransformer(); //TODO(dani): fixture needed here as well.
         service = new PostService(repository, transformer);
     }
 

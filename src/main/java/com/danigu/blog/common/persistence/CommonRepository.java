@@ -12,24 +12,28 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @param <E> Entity
  */
 public abstract class CommonRepository<E> {
-    private final EntityManagerFactory emf;
+    protected final Class<E> clazz;
+    protected final EntityManagerFactory emf;
 
-    protected CommonRepository(EntityManagerFactory emf) {
+    protected CommonRepository(EntityManagerFactory emf, Class<E> clazz) {
         checkNotNull(emf);
+        checkNotNull(clazz);
+
         this.emf = emf;
+        this.clazz = clazz;
     }
 
     public E getById(long id) {
         checkNotNull(id);
-        return getEntityManager().find(getClazz(), id);
+        return getEntityManager().find(clazz, id);
     }
 
     public List<E> getAll() {
         EntityManager em = getEntityManager();
 
         //TODO(dani): this is ugly, clean this up.
-        CriteriaQuery<E> cq = em.getCriteriaBuilder().createQuery(getClazz());
-        cq.select(cq.from(getClazz()));
+        CriteriaQuery<E> cq = em.getCriteriaBuilder().createQuery(clazz);
+        cq.select(cq.from(clazz));
 
         return em.createQuery(cq).getResultList();
     }
@@ -45,6 +49,4 @@ public abstract class CommonRepository<E> {
     protected EntityManager getEntityManager() {
         return emf.createEntityManager();
     };
-
-    protected abstract Class<E> getClazz();
 }

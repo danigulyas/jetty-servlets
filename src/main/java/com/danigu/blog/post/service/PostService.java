@@ -14,7 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 public class PostService extends CommonService<PostEntity, Post> {
 
-    public PostService(PostRepository repository, PostEntityDTOTransformer transformer) {
+    public PostService(PostRepository repository, PostTransformer transformer) {
         super(repository, transformer);
     }
 

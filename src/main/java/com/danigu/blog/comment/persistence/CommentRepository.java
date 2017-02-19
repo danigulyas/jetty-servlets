@@ -12,17 +12,13 @@ import java.util.List;
  */
 public class CommentRepository extends CommonRepository<CommentEntity> {
     public CommentRepository(EntityManagerFactory emf) {
-        super(emf);
+        super(emf, CommentEntity.class);
     }
 
     public List<CommentEntity> getAllWithPostId(long id) {
         TypedQuery<CommentEntity> query = getEntityManager()
-                .createQuery("SELECT c from CommentDto c WHERE c.post.id = :postId", getClazz());
+                .createQuery("SELECT c from CommentDto c WHERE c.post.id = :postId", clazz);
 
         return query.setParameter("postId", id).getResultList();
-    }
-
-    protected Class<CommentEntity> getClazz() {
-        return CommentEntity.class;
     }
 }

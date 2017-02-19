@@ -1,11 +1,11 @@
 package com.danigu.blog.dic;
 
 import com.danigu.blog.comment.persistence.CommentRepository;
-import com.danigu.blog.comment.service.CommentEntityDTOTransformer;
+import com.danigu.blog.comment.service.CommentTransformer;
 import com.danigu.blog.comment.service.CommentService;
 import com.danigu.blog.post.persistence.PostRepository;
 import com.danigu.blog.post.service.PostService;
-import com.danigu.blog.post.service.PostEntityDTOTransformer;
+import com.danigu.blog.post.service.PostTransformer;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,7 +41,7 @@ public class StationLocator {
 
     public PostService getPostService() {
         if(postService == null) {
-            postService = new PostService(getPostRepository(), new PostEntityDTOTransformer());
+            postService = new PostService(getPostRepository(), new PostTransformer());
         }
 
         return postService;
@@ -57,7 +57,7 @@ public class StationLocator {
 
     public CommentService getCommentService() {
         if(commentService == null) {
-            CommentEntityDTOTransformer transformer = new CommentEntityDTOTransformer(new PostEntityDTOTransformer());
+            CommentTransformer transformer = new CommentTransformer(new PostTransformer());
             commentService = new CommentService(getCommentRepository(), transformer);
         }
 
