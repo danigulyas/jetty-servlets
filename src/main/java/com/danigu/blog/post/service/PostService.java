@@ -17,7 +17,7 @@ public class PostService extends CommonService<PostEntity, Post> {
         super(repository, transformer);
     }
 
-    protected Class<PostEntity> getClazz() {
+    protected Class<PostEntity> getEntityClazz() {
         return PostEntity.class;
     }
 

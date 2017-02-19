@@ -1,5 +1,7 @@
 package com.danigu.blog.servlet;
 
+import com.danigu.blog.comment.Comment;
+import com.danigu.blog.comment.service.CommentService;
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +19,10 @@ import java.util.List;
  * @author dani
  */
 @RequiredArgsConstructor
-public class PostServlet extends HttpServlet {
+public class BlogServlet extends HttpServlet {
     public final String GET_ALL_URI = "/all";
     public final PostService postService;
+    public final CommentService commentService;
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,6 +68,18 @@ public class PostServlet extends HttpServlet {
             resp.setStatus(HttpStatus.NOT_FOUND_404);
         } else {
             pw.printf("Found %d posts: <br>", posts.size());
+
+            for(Post post : posts) {
+                pw.println(this.formatPost(post));
+
+                List<Comment> comments = commentService.getComments(post);
+                if(comments.size() > 0) {
+                    pw.println("<ul>");
+                    comments.stream().map(this::formatComment).forEach(pw::println);
+                    pw.println("</ul>");
+                }
+
+            }
             posts.stream().map(this::formatPost).forEach(pw::println);
             resp.setStatus(HttpStatus.OK_200);
         }
@@ -109,6 +124,14 @@ public class PostServlet extends HttpServlet {
      */
     public String formatPost(Post post) {
         return String.format("<p><code>#%d</code> - <b>%s</b>: %s...</p>", post.getId(), post.getName(), post.getContent());
+    }
+
+    /**
+     * @param comment
+     * @return HTML formatted output of the comment, in a <li> tag.
+     */
+    public String formatComment(Comment comment) {
+        return String.format("<li><code>#%d<code>: %s", comment.getId(), comment.getContent());
     }
 
 }

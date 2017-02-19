@@ -5,7 +5,6 @@ import com.danigu.blog.common.persistence.CommonRepository;
 import javassist.NotFoundException;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -41,13 +40,13 @@ public abstract class CommonService<E, D> {
     }
 
     public void deleteById(Long id) throws NotFoundException {
-        if(isNull(id)) throw new NotFoundException("No " + getClazz().getName() + " with id 'null'.");
+        if(isNull(id)) throw new NotFoundException("No " + getEntityClazz().getName() + " with id 'null'.");
 
         E entity = repository.getById(id);
-        if(isNull(entity)) throw new NotFoundException(getClazz().getName() + " not found.");
+        if(isNull(entity)) throw new NotFoundException(getEntityClazz().getName() + " not found.");
 
         repository.remove(entity);
     }
 
-    protected abstract Class<E> getClazz();
+    protected abstract Class<E> getEntityClazz();
 }

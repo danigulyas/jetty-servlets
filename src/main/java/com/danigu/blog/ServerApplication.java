@@ -1,7 +1,7 @@
 package com.danigu.blog;
 
 import com.danigu.blog.dic.StationLocator;
-import com.danigu.blog.servlet.PostServlet;
+import com.danigu.blog.servlet.BlogServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -25,7 +25,7 @@ public class ServerApplication {
     }
 
     public static void configureServlets(StationLocator locator, ServletContextHandler context) {
-        PostServlet postServlet = new PostServlet(locator.getPostService());
-        context.addServlet(new ServletHolder(postServlet), "/post/*");
+        BlogServlet blogServlet = new BlogServlet(locator.getPostService(), locator.getCommentService());
+        context.addServlet(new ServletHolder(blogServlet), "/post/*");
     }
 }

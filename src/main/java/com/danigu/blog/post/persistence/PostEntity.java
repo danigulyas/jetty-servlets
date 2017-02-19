@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * Implementation-detail of the database, represented as {@link Post} to the outside world.
+ * Implementation-detail of the database, represented as {@link com.danigu.blog.post.Post} to the outside world.
  * @author dani
  */
-@Data
-@Entity(name = "post")
-@Table(name = "post")
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "post")
+@Table(name = "post")
+@Data
 public class PostEntity {
     @Id
     @GeneratedValue
@@ -26,7 +26,4 @@ public class PostEntity {
 
     @Column
     private String content;
-
-//    @OneToMany(targetEntity = CommentEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//    private List<CommentEntity> comments;
 }
