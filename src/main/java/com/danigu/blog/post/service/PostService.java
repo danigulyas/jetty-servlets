@@ -33,7 +33,7 @@ public class PostService extends CommonService<PostEntity, Post> {
         checkArgument(name != null, "Name can't be null.", IllegalArgumentException.class);
         checkArgument(name != null, "Name can't be null.", IllegalArgumentException.class);
 
-        return transformer.convert(repository.save(new PostEntity((Long) null, name, content)));
+        return transformer.toEntity(repository.save(new PostEntity((Long) null, name, content)));
     }
 
     /**
@@ -53,6 +53,6 @@ public class PostService extends CommonService<PostEntity, Post> {
         if(post == null) throw new NotFoundException("PostDTO not found.");
 
         post.setName(newName);
-        return transformer.convert(repository.save(post));
+        return transformer.toEntity(repository.save(post));
     }
 }

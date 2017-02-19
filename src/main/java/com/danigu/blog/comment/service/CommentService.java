@@ -38,9 +38,9 @@ public class CommentService extends CommonService<CommentEntity, Comment> {
          * but then we're tightly coupled to that. :(
          */
         Comment dto = new CommentDTO(Long.valueOf(null), post, content);
-        CommentEntity entity = transformer.convertFrom(dto);
+        CommentEntity entity = transformer.fromEntity(dto);
 
-        return transformer.convert(repository.save(entity));
+        return transformer.toEntity(repository.save(entity));
     }
 
     public List<Comment> getComments(Post post) {
@@ -49,7 +49,7 @@ public class CommentService extends CommonService<CommentEntity, Comment> {
         return getRepository()
                 .getAllWithPostId(post.getId())
                 .stream()
-                .map(transformer::convert)
+                .map(transformer::toEntity)
                 .collect(Collectors.toList());
     }
 

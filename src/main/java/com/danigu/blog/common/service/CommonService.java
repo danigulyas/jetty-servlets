@@ -1,6 +1,5 @@
 package com.danigu.blog.common.service;
 
-import com.danigu.blog.common.TwoWayTransformer;
 import com.danigu.blog.common.persistence.CommonRepository;
 import javassist.NotFoundException;
 
@@ -19,10 +18,10 @@ public abstract class CommonService<E, D> {
     /**
      * Responsible for converting Entities to DTO's.
      */
-    protected final TwoWayTransformer<E, D> transformer;
+    protected final Transformer<E, D> transformer;
     protected final CommonRepository<E> repository;
 
-    public CommonService(CommonRepository<E> repository, TwoWayTransformer<E, D> transformer) {
+    public CommonService(CommonRepository<E> repository, Transformer<E, D> transformer) {
         checkNotNull(repository);
         checkNotNull(transformer);
 
@@ -31,12 +30,12 @@ public abstract class CommonService<E, D> {
     }
 
     public List<D> getAll() {
-        return repository.getAll().stream().map(transformer::convert).collect(Collectors.toList());
+        return repository.getAll().stream().map(transformer::toEntity).collect(Collectors.toList());
     }
 
     public D getById(Long id) {
         checkNotNull(id);
-        return transformer.convert(repository.getById(id));
+        return transformer.toEntity(repository.getById(id));
     }
 
     public void deleteById(Long id) throws NotFoundException {
