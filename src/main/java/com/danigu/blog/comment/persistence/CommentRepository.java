@@ -1,5 +1,6 @@
 package com.danigu.blog.comment.persistence;
 
+import com.danigu.blog.comment.CommentEntity;
 import com.danigu.blog.common.persistence.CommonRepository;
 
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +17,7 @@ public class CommentRepository extends CommonRepository<CommentEntity> {
 
     public List<CommentEntity> getAllWithPostId(long id) {
         TypedQuery<CommentEntity> query = getEntityManager()
-                .createQuery("SELECT c from Comment c WHERE c.post.id = :postId", getClazz());
+                .createQuery("SELECT c from CommentDto c WHERE c.post.id = :postId", getClazz());
 
         return query.setParameter("postId", id).getResultList();
     }

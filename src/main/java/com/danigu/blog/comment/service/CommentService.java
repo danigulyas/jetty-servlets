@@ -1,11 +1,11 @@
 package com.danigu.blog.comment.service;
 
 import com.danigu.blog.comment.Comment;
-import com.danigu.blog.comment.persistence.CommentEntity;
+import com.danigu.blog.comment.CommentDTO;
+import com.danigu.blog.comment.CommentEntity;
 import com.danigu.blog.comment.persistence.CommentRepository;
 import com.danigu.blog.common.service.CommonService;
 import com.danigu.blog.post.Post;
-import com.danigu.blog.post.persistence.PostEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class CommentService extends CommonService<CommentEntity, Comment> {
          * This would be avoidable by depending on an instance of {@link com.danigu.blog.post.service.PostService},
          * but then we're tightly coupled to that. :(
          */
-        Comment dto = new Comment(Long.valueOf(null), post, content);
+        Comment dto = new CommentDTO(Long.valueOf(null), post, content);
         CommentEntity entity = transformer.convertFrom(dto);
 
         return transformer.convert(repository.save(entity));

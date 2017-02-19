@@ -1,9 +1,9 @@
 package com.danigu.blog.comment.service;
 
 import com.danigu.blog.comment.Comment;
-import com.danigu.blog.comment.persistence.CommentEntity;
+import com.danigu.blog.comment.CommentDTO;
+import com.danigu.blog.comment.CommentEntity;
 import com.danigu.blog.common.TwoWayTransformer;
-import com.danigu.blog.post.persistence.PostEntity;
 import com.danigu.blog.post.service.PostEntityDTOTransformer;
 import lombok.AllArgsConstructor;
 
@@ -15,7 +15,7 @@ public class CommentEntityDTOTransformer implements TwoWayTransformer<CommentEnt
     private final PostEntityDTOTransformer postTransformer;
 
     public Comment convert(CommentEntity entity) {
-        return new Comment(entity.getId(), postTransformer.convert(entity.getPost()), entity.getContent());
+        return new CommentDTO(entity.getId(), postTransformer.convert(entity.getPost()), entity.getContent());
     }
 
     public CommentEntity convertFrom(Comment dto) {
