@@ -1,9 +1,10 @@
-package com.danigu.blog.post.persistence;
+package com.danigu.blog.post;
 
 
-import lombok.AccessLevel;
+import com.danigu.blog.post.service.PostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -11,11 +12,12 @@ import javax.persistence.*;
  * Implementation-detail of the database, represented as {@link PostDTO} to the outside world.
  * @author dani
  */
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "post")
 @Table(name = "post")
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-class PostEntity {
+@Data
+public class PostEntity {
     @Id
     @GeneratedValue
     private long id;
@@ -25,7 +27,4 @@ class PostEntity {
 
     @Column
     private String content;
-
-//    @OneToMany(targetEntity = CommentEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//    private List<CommentEntity> comments;
 }
