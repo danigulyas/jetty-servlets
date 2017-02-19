@@ -1,5 +1,6 @@
-package com.danigu.blog.comment;
+package com.danigu.blog.comment.service;
 
+import com.danigu.blog.comment.Comment;
 import com.danigu.blog.post.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,6 @@
 package com.danigu.blog.comment.service;
 
 import com.danigu.blog.comment.Comment;
-import com.danigu.blog.comment.CommentDTO;
 import com.danigu.blog.comment.CommentEntity;
 import com.danigu.blog.common.TwoWayTransformer;
 import com.danigu.blog.post.service.PostEntityDTOTransformer;
