@@ -1,10 +1,9 @@
 package com.danigu.blog.comment;
 
-import com.danigu.blog.post.persistence.PostEntity;
+import com.danigu.blog.post.PostEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import javax.persistence.*;
 

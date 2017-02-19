@@ -5,6 +5,7 @@ import com.danigu.blog.comment.CommentEntity;
 import com.danigu.blog.comment.persistence.CommentRepository;
 import com.danigu.blog.common.service.CommonService;
 import com.danigu.blog.post.Post;
+import com.danigu.blog.post.service.PostDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,8 +31,8 @@ public class CommentService extends CommonService<CommentEntity, Comment> {
 
         /**
          * This is fishy, we don't want to depend on PostService / PostWhatever, but we wan't to make sure we're not
-         * persisting any Post, since it's not guaranteed that {@link Post} can only be created by the PostService
-         * we might be persisting Post's here (as a cascade) which is out of scope.
+         * persisting any PostDTO, since it's not guaranteed that {@link PostDTO} can only be created by the PostService
+         * we might be persisting PostDTO's here (as a cascade) which is out of scope.
          *
          * This would be avoidable by depending on an instance of {@link com.danigu.blog.post.service.PostService},
          * but then we're tightly coupled to that. :(

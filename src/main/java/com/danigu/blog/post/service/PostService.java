@@ -2,6 +2,7 @@ package com.danigu.blog.post.service;
 
 import com.danigu.blog.common.service.CommonService;
 import com.danigu.blog.post.Post;
+import com.danigu.blog.post.PostEntity;
 import com.danigu.blog.post.persistence.*;
 import javassist.NotFoundException;
 
@@ -49,7 +50,7 @@ public class PostService extends CommonService<PostEntity, Post> {
         checkArgument(newName.length() > 0, "Name must be at least 1 character long.", IllegalArgumentException.class);
 
         PostEntity post = repository.getById(id);
-        if(post == null) throw new NotFoundException("Post not found.");
+        if(post == null) throw new NotFoundException("PostDTO not found.");
 
         post.setName(newName);
         return transformer.convert(repository.save(post));

@@ -1,6 +1,7 @@
 package com.danigu.blog.post.persistence;
 
 import com.danigu.blog.common.persistence.CommonRepository;
+import com.danigu.blog.post.PostEntity;
 
 import javax.persistence.EntityManagerFactory;
 

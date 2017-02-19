@@ -1,6 +1,7 @@
-package com.danigu.blog.post.persistence;
+package com.danigu.blog.post;
 
 
+import com.danigu.blog.post.service.PostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 /**
- * Implementation-detail of the database, represented as {@link com.danigu.blog.post.Post} to the outside world.
+ * Implementation-detail of the database, represented as {@link PostDTO} to the outside world.
  * @author dani
  */
 @AllArgsConstructor

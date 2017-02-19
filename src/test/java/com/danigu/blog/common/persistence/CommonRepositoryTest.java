@@ -1,11 +1,10 @@
 package com.danigu.blog.common.persistence;
 
-import com.danigu.blog.post.persistence.PostEntity;
+import com.danigu.blog.post.PostEntity;
 import com.danigu.blog.post.persistence.PostRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

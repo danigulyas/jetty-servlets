@@ -1,8 +1,9 @@
 package com.danigu.blog.servlet;
 
-import com.danigu.blog.comment.CommentDto;
+import com.danigu.blog.comment.Comment;
 import com.danigu.blog.comment.service.CommentService;
 import com.danigu.blog.post.Post;
+import com.danigu.blog.post.service.PostDTO;
 import com.danigu.blog.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.jetty.http.HttpStatus;
@@ -72,7 +73,7 @@ public class BlogServlet extends HttpServlet {
             for(Post post : posts) {
                 pw.println(this.formatPost(post));
 
-                List<CommentDto> comments = commentService.getComments(post);
+                List<Comment> comments = commentService.getComments(post);
                 if(comments.size() > 0) {
                     pw.println("<ul>");
                     comments.stream().map(this::formatComment).forEach(pw::println);
@@ -127,11 +128,11 @@ public class BlogServlet extends HttpServlet {
     }
 
     /**
-     * @param commentDto
+     * @param comment
      * @return HTML formatted output of the add, in a <li> tag.
      */
-    public String formatComment(CommentDto commentDto) {
-        return String.format("<li><code>#%d<code>: %s", commentDto.getId(), commentDto.getContent());
+    public String formatComment(Comment comment) {
+        return String.format("<li><code>#%d<code>: %s", comment.getId(), comment.getContent());
     }
 
 }

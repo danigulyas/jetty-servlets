@@ -1,14 +1,12 @@
 package com.danigu.blog.common.service;
 
-import com.danigu.blog.common.TwoWayTransformer;
 import com.danigu.blog.post.Post;
-import com.danigu.blog.post.persistence.PostEntity;
+import com.danigu.blog.post.PostEntity;
 import com.danigu.blog.post.persistence.PostRepository;
 import com.danigu.blog.post.service.PostEntityDTOTransformer;
 import com.danigu.blog.post.service.PostService;
 import javassist.NotFoundException;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
