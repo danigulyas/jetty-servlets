@@ -1,7 +1,7 @@
 package com.danigu.blog.comment.persistence;
 
 import com.danigu.blog.comment.CommentEntity;
-import com.danigu.blog.common.persistence.CommonRepository;
+import com.danigu.blog.base.persistence.BaseRepository;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author dani
  */
-public class CommentRepository extends CommonRepository<CommentEntity> {
+public class CommentRepository extends BaseRepository<CommentEntity> {
     public CommentRepository(EntityManagerFactory emf) {
         super(emf, CommentEntity.class);
     }

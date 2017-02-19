@@ -3,7 +3,7 @@ package com.danigu.blog.comment.service;
 import com.danigu.blog.comment.Comment;
 import com.danigu.blog.comment.CommentEntity;
 import com.danigu.blog.comment.persistence.CommentRepository;
-import com.danigu.blog.common.service.CommonService;
+import com.danigu.blog.base.service.BaseService;
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.service.PostDTO;
 
@@ -15,7 +15,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * @author dani
  */
-public class CommentService extends CommonService<CommentEntity, Comment> {
+public class CommentService extends BaseService<CommentEntity, Comment> {
     public CommentService(CommentRepository repository, CommentTransformer transformer) {
         super(repository, transformer);
     }
@@ -28,15 +28,6 @@ public class CommentService extends CommonService<CommentEntity, Comment> {
         checkNotNull(post);
         checkNotNull(content);
 
-
-        /**
-         * This is fishy, we don't want to depend on PostService / PostWhatever, but we wan't to make sure we're not
-         * persisting any PostDTO, since it's not guaranteed that {@link PostDTO} can only be created by the PostService
-         * we might be persisting PostDTO's here (as a cascade) which is out of scope.
-         *
-         * This would be avoidable by depending on an instance of {@link com.danigu.blog.post.service.PostService},
-         * but then we're tightly coupled to that. :(
-         */
         Comment dto = new CommentDTO(Long.valueOf(null), post, content);
         CommentEntity entity = transformer.fromEntity(dto);
 

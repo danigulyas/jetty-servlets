@@ -1,4 +1,4 @@
-package com.danigu.blog.common.persistence;
+package com.danigu.blog.base.persistence;
 
 import com.danigu.blog.post.PostEntity;
 import com.danigu.blog.post.persistence.PostRepository;
@@ -14,11 +14,11 @@ import static org.mockito.Mockito.*;
 
 /**
  * Tests for generic repository.
- * TODO(dani): Add tests for {@link CommonRepository::getAll()}.
+ * TODO(dani): Add tests for {@link BaseRepository ::getAll()}.
  * TODO(dani): Depends on {@link PostRepository}, decoupling with a fixture would be better.
  * @author dani
  */
-public class CommonRepositoryTest {
+public class BaseRepositoryTest {
     private PostRepository repository;
 
     private EntityManager em;

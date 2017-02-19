@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
 /**
  * @author dani
  */
-public class StationLocator {
+public class ServiceLocator {
     private EntityManagerFactory entityManagerFactory;
     private PostService postService;
     private PostRepository postRepository;
@@ -21,7 +21,7 @@ public class StationLocator {
     private CommentService commentService;
     private CommentRepository commentRepository;
 
-    public StationLocator() {}
+    public ServiceLocator() {}
 
     public EntityManagerFactory getEntityManagerFactory() {
         if(entityManagerFactory == null) {

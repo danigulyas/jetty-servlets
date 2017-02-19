@@ -1,6 +1,6 @@
 package com.danigu.blog.post.service;
 
-import com.danigu.blog.common.service.Transformer;
+import com.danigu.blog.base.service.Transformer;
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.PostEntity;
 

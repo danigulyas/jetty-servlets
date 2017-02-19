@@ -1,4 +1,4 @@
-package com.danigu.blog.common.service;
+package com.danigu.blog.base.service;
 
 /**
  * Interface for two-way transformer.

@@ -1,6 +1,6 @@
 package com.danigu.blog.post.service;
 
-import com.danigu.blog.common.service.CommonService;
+import com.danigu.blog.base.service.BaseService;
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.PostEntity;
 import com.danigu.blog.post.persistence.*;
@@ -10,9 +10,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Service for managing posts.
- * @see CommonService
+ * @see BaseService
  */
-public class PostService extends CommonService<PostEntity, Post> {
+public class PostService extends BaseService<PostEntity, Post> {
 
     public PostService(PostRepository repository, PostTransformer transformer) {
         super(repository, transformer);

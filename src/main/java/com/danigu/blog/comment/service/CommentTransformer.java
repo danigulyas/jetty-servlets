@@ -2,7 +2,7 @@ package com.danigu.blog.comment.service;
 
 import com.danigu.blog.comment.Comment;
 import com.danigu.blog.comment.CommentEntity;
-import com.danigu.blog.common.service.Transformer;
+import com.danigu.blog.base.service.Transformer;
 import com.danigu.blog.post.service.PostTransformer;
 import lombok.AllArgsConstructor;
 

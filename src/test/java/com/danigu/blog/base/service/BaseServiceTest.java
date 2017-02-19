@@ -1,4 +1,4 @@
-package com.danigu.blog.common.service;
+package com.danigu.blog.base.service;
 
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.PostEntity;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
  * TODO(dani): Dependent on {@link com.danigu.blog.post.service.PostService}, not nice, fixture neeeeeeeeded!
  * @author dani
  */
-public class CommonServiceTest {
+public class BaseServiceTest {
     private PostRepository repository;
     private PostTransformer transformer;
     private PostService service;

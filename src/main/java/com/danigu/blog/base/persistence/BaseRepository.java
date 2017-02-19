@@ -1,4 +1,4 @@
-package com.danigu.blog.common.persistence;
+package com.danigu.blog.base.persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,11 +11,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Generic repository class.
  * @param <E> Entity
  */
-public abstract class CommonRepository<E> {
+public abstract class BaseRepository<E> {
     protected final Class<E> clazz;
     protected final EntityManagerFactory emf;
 
-    protected CommonRepository(EntityManagerFactory emf, Class<E> clazz) {
+    protected BaseRepository(EntityManagerFactory emf, Class<E> clazz) {
         checkNotNull(emf);
         checkNotNull(clazz);
 

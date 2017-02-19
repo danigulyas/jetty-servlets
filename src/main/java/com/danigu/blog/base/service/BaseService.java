@@ -1,6 +1,6 @@
-package com.danigu.blog.common.service;
+package com.danigu.blog.base.service;
 
-import com.danigu.blog.common.persistence.CommonRepository;
+import com.danigu.blog.base.persistence.BaseRepository;
 import javassist.NotFoundException;
 
 import java.util.List;
@@ -14,14 +14,14 @@ import static java.util.Objects.isNull;
  * @param <E> Entity
  * @param <D> DTO
  */
-public abstract class CommonService<E, D> {
+public abstract class BaseService<E, D> {
     /**
      * Responsible for converting Entities to DTO's.
      */
     protected final Transformer<E, D> transformer;
-    protected final CommonRepository<E> repository;
+    protected final BaseRepository<E> repository;
 
-    public CommonService(CommonRepository<E> repository, Transformer<E, D> transformer) {
+    public BaseService(BaseRepository<E> repository, Transformer<E, D> transformer) {
         checkNotNull(repository);
         checkNotNull(transformer);
 
