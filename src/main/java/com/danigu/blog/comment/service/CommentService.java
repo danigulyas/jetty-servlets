@@ -24,7 +24,7 @@ public class CommentService extends CommonService<CommentEntity, Comment> {
         return CommentEntity.class;
     }
 
-    public Comment comment(Post post, String content) {
+    public Comment add(Post post, String content) {
         checkNotNull(post);
         checkNotNull(content);
 

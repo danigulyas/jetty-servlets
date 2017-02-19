@@ -128,7 +128,7 @@ public class BlogServlet extends HttpServlet {
 
     /**
      * @param comment
-     * @return HTML formatted output of the comment, in a <li> tag.
+     * @return HTML formatted output of the add, in a <li> tag.
      */
     public String formatComment(Comment comment) {
         return String.format("<li><code>#%d<code>: %s", comment.getId(), comment.getContent());
