@@ -41,7 +41,7 @@ public class ServiceLocator {
 
     public PostService getPostService() {
         if(postService == null) {
-            postService = new PostService(getPostRepository(), new PostTransformer());
+            postService = new PostService(getPostRepository(), new PostTransformer(), getCommentService());
         }
 
         return postService;

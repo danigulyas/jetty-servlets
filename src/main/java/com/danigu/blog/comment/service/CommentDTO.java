@@ -15,4 +15,9 @@ public class CommentDTO implements Comment {
     public long id;
     public Post post;
     public String content;
+
+    public CommentDTO(Post post, String content) {
+        this.post = post;
+        this.content = content;
+    }
 }

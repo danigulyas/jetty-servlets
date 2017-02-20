@@ -24,7 +24,7 @@ public class CommentService extends BaseService<CommentEntity, Comment> {
         checkNotNull(post);
         checkNotNull(content);
 
-        Comment dto = new CommentDTO(Long.valueOf(null), post, content);
+        Comment dto = new CommentDTO(post, content);
         CommentEntity entity = transformer.fromEntity(dto);
 
         return transformer.toEntity(repository.save(entity));
@@ -40,9 +40,12 @@ public class CommentService extends BaseService<CommentEntity, Comment> {
                 .collect(Collectors.toList());
     }
 
+    public void deleteCommentsByPostId(long postId) {
+        List<CommentEntity> entities = getRepository().getAllWithPostId(postId);
+        getRepository().removeAll(entities);
+    }
+
     private CommentRepository getRepository() {
         return (CommentRepository) repository;
     }
-
-
 }

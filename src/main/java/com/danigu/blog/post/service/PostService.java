@@ -1,21 +1,29 @@
 package com.danigu.blog.post.service;
 
 import com.danigu.blog.base.service.BaseService;
+import com.danigu.blog.comment.service.CommentService;
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.PostEntity;
 import com.danigu.blog.post.persistence.*;
 import javassist.NotFoundException;
 
+import javax.persistence.OneToOne;
+
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Service for managing posts.
  * @see BaseService
  */
 public class PostService extends BaseService<PostEntity, Post> {
+    protected CommentService commentService;
 
-    public PostService(PostRepository repository, PostTransformer transformer) {
+    public PostService(PostRepository repository, PostTransformer transformer, CommentService commentService) {
         super(repository, transformer);
+        checkNotNull(commentService);
+
+        this.commentService = commentService;
     }
 
     /**
@@ -25,30 +33,16 @@ public class PostService extends BaseService<PostEntity, Post> {
      * @return the post created.
      * @throws IllegalArgumentException
      */
-    public Post newPost(String name, String content) throws IllegalArgumentException {
+    public Post add(String name, String content) throws IllegalArgumentException {
         checkArgument(name != null, "Name can't be null.", IllegalArgumentException.class);
         checkArgument(name != null, "Name can't be null.", IllegalArgumentException.class);
 
-        return transformer.toEntity(repository.save(new PostEntity((Long) null, name, content)));
+        return transformer.toEntity(repository.save(new PostEntity(name, content)));
     }
 
-    /**
-     * Changes a name of an existing post.
-     * @param id of the post.
-     * @param newName of the post to be modified.
-     * @return the modified post.
-     * @throws NotFoundException if the post is not found.
-     * @throws IllegalArgumentException
-     */
-    public Post changeName(long id, String newName) throws NotFoundException, IllegalArgumentException {
-        checkArgument(Long.valueOf(id) != null, "Id can't be null.", IllegalArgumentException.class);
-        checkArgument(newName != null, "Name can't be null.", IllegalArgumentException.class);
-        checkArgument(newName.length() > 0, "Name must be at least 1 character long.", IllegalArgumentException.class);
-
-        PostEntity post = repository.getById(id);
-        if(post == null) throw new NotFoundException("PostDTO not found.");
-
-        post.setName(newName);
-        return transformer.toEntity(repository.save(post));
+    @Override
+    public void deleteById(Long id) throws NotFoundException {
+        commentService.deleteCommentsByPostId(id);
+        super.deleteById(id);
     }
 }

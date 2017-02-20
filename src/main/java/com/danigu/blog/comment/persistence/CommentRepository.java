@@ -17,7 +17,7 @@ public class CommentRepository extends BaseRepository<CommentEntity> {
 
     public List<CommentEntity> getAllWithPostId(long id) {
         TypedQuery<CommentEntity> query = getEntityManager()
-                .createQuery("SELECT c from CommentDto c WHERE c.post.id = :postId", clazz);
+                .createQuery("SELECT c from Comment c WHERE c.post.id = :postId", clazz);
 
         return query.setParameter("postId", id).getResultList();
     }

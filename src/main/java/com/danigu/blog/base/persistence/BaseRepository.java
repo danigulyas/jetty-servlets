@@ -2,6 +2,7 @@ package com.danigu.blog.base.persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.CriteriaQuery;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -10,9 +11,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Generic repository class.
- * @param <E> Entity
+ * @param <E> HasId
  */
-public class BaseRepository<E> {
+public class BaseRepository<E extends HasId> {
     protected final Class<E> clazz;
     protected final EntityManagerFactory emf;
 
@@ -40,11 +41,34 @@ public class BaseRepository<E> {
     }
 
     public E save(E entity) {
-        return getEntityManager().merge(entity);
+        EntityManager em = getEntityManager();
+
+        em.getTransaction().begin();
+        em.merge(entity);
+        em.getTransaction().commit();
+
+        return entity;
     }
 
     public void remove(E entity) {
-        getEntityManager().remove(entity);
+        EntityManager em = getEntityManager();
+
+        em.getTransaction().begin();
+        em.remove(em.getReference(clazz, entity.getId()));
+        em.getTransaction().commit();
+    }
+
+    public void removeAll(List<E> entities) {
+        EntityManager em = getEntityManager();
+
+        em.getTransaction().begin();
+
+        entities
+                .stream()
+                .map(entity -> em.getReference(clazz, entity.getId()))
+                .forEach(em::remove);
+
+        em.getTransaction().commit();
     }
 
     protected EntityManager getEntityManager() {

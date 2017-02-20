@@ -1,6 +1,7 @@
 package com.danigu.blog.base.service;
 
 import com.danigu.blog.base.persistence.BaseRepository;
+import com.danigu.blog.base.persistence.HasId;
 import javassist.NotFoundException;
 
 import java.lang.reflect.ParameterizedType;
@@ -12,10 +13,10 @@ import static java.util.Objects.isNull;
 
 /**
  * Generic service.
- * @param <E> Entity
+ * @param <E> HasId
  * @param <D> DTO
  */
-public class BaseService<E, D> {
+public class BaseService<E extends HasId, D> {
     /**
      * Responsible for converting Entities to DTO's.
      */
