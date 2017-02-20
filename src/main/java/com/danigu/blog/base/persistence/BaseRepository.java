@@ -3,6 +3,7 @@ package com.danigu.blog.base.persistence;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaQuery;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -11,16 +12,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Generic repository class.
  * @param <E> Entity
  */
-public abstract class BaseRepository<E> {
+public class BaseRepository<E> {
     protected final Class<E> clazz;
     protected final EntityManagerFactory emf;
 
-    protected BaseRepository(EntityManagerFactory emf, Class<E> clazz) {
+    protected BaseRepository(EntityManagerFactory emf) {
         checkNotNull(emf);
-        checkNotNull(clazz);
 
+        // Resolve class bound to template parameter in runtime.
+        this.clazz = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         this.emf = emf;
-        this.clazz = clazz;
     }
 
     public E getById(long id) {

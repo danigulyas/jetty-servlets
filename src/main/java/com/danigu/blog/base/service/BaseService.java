@@ -3,6 +3,7 @@ package com.danigu.blog.base.service;
 import com.danigu.blog.base.persistence.BaseRepository;
 import javassist.NotFoundException;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,17 +15,22 @@ import static java.util.Objects.isNull;
  * @param <E> Entity
  * @param <D> DTO
  */
-public abstract class BaseService<E, D> {
+public class BaseService<E, D> {
     /**
      * Responsible for converting Entities to DTO's.
      */
     protected final Transformer<E, D> transformer;
     protected final BaseRepository<E> repository;
+    protected final Class<E> clazz;
+    protected final Class<D> dtoClazz;
 
     public BaseService(BaseRepository<E> repository, Transformer<E, D> transformer) {
         checkNotNull(repository);
         checkNotNull(transformer);
 
+        // Resolve class bound to template parameter in runtime.
+        this.clazz = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        this.dtoClazz = (Class<D>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
         this.repository = repository;
         this.transformer = transformer;
     }
@@ -39,13 +45,11 @@ public abstract class BaseService<E, D> {
     }
 
     public void deleteById(Long id) throws NotFoundException {
-        if(isNull(id)) throw new NotFoundException("No " + getEntityClazz().getName() + " with id 'null'.");
+        if(isNull(id)) throw new NotFoundException("No " + dtoClazz.getName() + " with id 'null'.");
 
         E entity = repository.getById(id);
-        if(isNull(entity)) throw new NotFoundException(getEntityClazz().getName() + " not found.");
+        if(isNull(entity)) throw new NotFoundException(dtoClazz.getName() + " not found.");
 
         repository.remove(entity);
     }
-
-    protected abstract Class<E> getEntityClazz();
 }

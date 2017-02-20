@@ -18,10 +18,6 @@ public class PostService extends BaseService<PostEntity, Post> {
         super(repository, transformer);
     }
 
-    protected Class<PostEntity> getEntityClazz() {
-        return PostEntity.class;
-    }
-
     /**
      * Creates a new post.
      * @param name of the new post.

@@ -13,6 +13,6 @@ import javax.persistence.EntityManagerFactory;
 public class PostRepository extends BaseRepository<PostEntity> {
 
     public PostRepository(EntityManagerFactory emf) {
-        super(emf, PostEntity.class);
+        super(emf);
     }
 }

@@ -20,10 +20,6 @@ public class CommentService extends BaseService<CommentEntity, Comment> {
         super(repository, transformer);
     }
 
-    protected Class<CommentEntity> getEntityClazz() {
-        return CommentEntity.class;
-    }
-
     public Comment add(Post post, String content) {
         checkNotNull(post);
         checkNotNull(content);

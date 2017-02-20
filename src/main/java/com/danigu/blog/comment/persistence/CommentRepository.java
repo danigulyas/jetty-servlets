@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class CommentRepository extends BaseRepository<CommentEntity> {
     public CommentRepository(EntityManagerFactory emf) {
-        super(emf, CommentEntity.class);
+        super(emf);
     }
 
     public List<CommentEntity> getAllWithPostId(long id) {
