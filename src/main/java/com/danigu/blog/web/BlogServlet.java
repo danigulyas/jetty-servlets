@@ -1,4 +1,4 @@
-package com.danigu.blog.presentation;
+package com.danigu.blog.web;
 
 import com.danigu.blog.comment.Comment;
 import com.danigu.blog.comment.service.CommentService;
@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 /**
+ * Controller and router for the Blog.
  * @author dani
  */
 @RequiredArgsConstructor

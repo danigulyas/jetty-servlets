@@ -1,4 +1,4 @@
-package com.danigu.blog.presentation;
+package com.danigu.blog.web;
 
 import com.danigu.blog.post.service.PostService;
 import javassist.NotFoundException;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
+ * Responsible for creating and deleting posts, controller and router.
  * @author dani
  */
 @AllArgsConstructor

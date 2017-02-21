@@ -1,10 +1,8 @@
 package com.danigu.blog;
 
-import com.danigu.blog.comment.service.CommentService;
-import com.danigu.blog.dic.ServiceLocator;
-import com.danigu.blog.presentation.BlogServlet;
-import com.danigu.blog.presentation.CommentServlet;
-import com.danigu.blog.presentation.PostServlet;
+import com.danigu.blog.web.BlogServlet;
+import com.danigu.blog.web.CommentServlet;
+import com.danigu.blog.web.PostServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;

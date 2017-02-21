@@ -1,6 +1,5 @@
-package com.danigu.blog.presentation;
+package com.danigu.blog.web;
 
-import com.danigu.blog.comment.Comment;
 import com.danigu.blog.comment.service.CommentService;
 import com.danigu.blog.post.Post;
 import com.danigu.blog.post.service.PostService;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Responsible for creating and deleting comments.
+ * Responsible for creating and deleting comments, controller and router.
  * @author dani
  */
 @AllArgsConstructor

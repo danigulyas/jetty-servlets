@@ -1,4 +1,4 @@
-package com.danigu.blog.dic;
+package com.danigu.blog;
 
 import com.danigu.blog.comment.persistence.CommentRepository;
 import com.danigu.blog.comment.service.CommentTransformer;
